@@ -1,0 +1,21 @@
+2022-05-04 19:55:02.227 -07:00 [INF] Program started with arguments: -f C:\Users\chughes\Documents\bccrc\softwareRepository\RawTools\raw-test-file\200fm_BSA_100_FS_01_220409050657.raw -xic 500,10
+2022-05-04 19:55:02.642 -07:00 [INF] Files to be processed, provided as list: C:\Users\chughes\Documents\bccrc\softwareRepository\RawTools\raw-test-file\200fm_BSA_100_FS_01_220409050657.raw
+2022-05-04 19:55:02.670 -07:00 [INF] Extracting scan indices
+2022-05-04 19:55:02.845 -07:00 [INF] Extracting method/instrument information
+2022-05-04 19:55:03.086 -07:00 [INF] Extracting trailer extras
+2022-05-04 19:55:03.103 -07:00 [INF] Extracting precursor masses
+2022-05-04 19:55:03.113 -07:00 [INF] Extracting retention times
+2022-05-04 20:00:45.293 -07:00 [INF] Program started with arguments: -f C:\Users\chughes\Documents\bccrc\softwareRepository\RawTools\raw-test-file\200fm_BSA_100_FS_01_220409050657.raw -xic 500,10
+2022-05-04 20:00:45.405 -07:00 [INF] Files to be processed, provided as list: C:\Users\chughes\Documents\bccrc\softwareRepository\RawTools\raw-test-file\200fm_BSA_100_FS_01_220409050657.raw
+2022-05-04 20:00:45.433 -07:00 [INF] Extracting scan indices
+2022-05-04 20:00:45.605 -07:00 [INF] Extracting method/instrument information
+2022-05-04 20:00:45.838 -07:00 [INF] Extracting trailer extras
+2022-05-04 20:00:45.852 -07:00 [INF] Extracting precursor masses
+2022-05-04 20:00:45.862 -07:00 [INF] Extracting retention times
+2022-05-05 13:03:56.704 -07:00 [INF] Program started with arguments: -f C:\Users\chughes\Documents\bccrc\softwareRepository\RawTools\raw-test-file\200fm_BSA_100_FS_01_220409050657.raw - -faimsMgf
+2022-05-05 13:03:57.071 -07:00 [INF] Files to be processed, provided as list: C:\Users\chughes\Documents\bccrc\softwareRepository\RawTools\raw-test-file\200fm_BSA_100_FS_01_220409050657.raw
+2022-05-05 13:03:57.098 -07:00 [INF] Extracting scan indices
+2022-05-05 13:03:57.269 -07:00 [INF] Extracting method/instrument information
+2022-05-05 13:03:57.509 -07:00 [INF] Extracting trailer extras
+2022-05-05 13:03:57.523 -07:00 [INF] Extracting precursor masses
+2022-05-05 13:03:57.532 -07:00 [INF] Extracting retention times
