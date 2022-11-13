@@ -3,7 +3,7 @@ import os
 import tempfile
 import pandas as pd
 
-from MSLoader import DIR_PATH
+from pyRawTools import DIR_PATH
 
 RT_PATH = os.path.join(DIR_PATH, 'module/RawTools/RawTools.exe')
 
@@ -41,4 +41,4 @@ class Loader:
 if __name__ == '__main__':
     loader = Loader()
     loader.version()
-    data, metrix = loader.load("/Users/Estrella/Developer/MSLoader/Data_Example/HeLa.RAW")
+    data, metrix = loader.load("/Users/Estrella/Developer/pyRawTools/Data_Example/HeLa.RAW")
