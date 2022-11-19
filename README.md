@@ -26,6 +26,8 @@ pyRawTools is a Python package for Linux/Mac processing raw data from mass spect
 1. Convert raw file to pandas DataFrame
 ```python
 from pyRawTools import Loader
+
+
 loader = Loader()
 raw_data, raw_metrix = loader.load('path/to/raw/file.RAW')
 ```
