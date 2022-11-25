@@ -1,14 +1,14 @@
 from setuptools import find_packages, setup
 
 
-VERSION = '0.1.2'
+VERSION = '0.1.3'
 
 setup(
     name='pyRawTools',
     version=VERSION,
     author='EstrellaXD',
     author_email="estrellaxd05@gmail.com",
-    description='pyRawTools is a Python package for loading MS data.',
+    description='pyRawTools is a Python package for loading Thermo MS data.',
     keywords="RAW MS data",
     packages=find_packages(),
     include_package_data=True,

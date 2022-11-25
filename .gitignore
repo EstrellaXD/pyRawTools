@@ -1,2 +1,5 @@
 .idea
 /pyRawTools/rawtools_log.txt
+/build
+/dist
+/pyRawTools.egg-info

@@ -1,6 +1,6 @@
 # pyRawTools
 
-pyRawTools is a Python package for Linux/Mac processing raw data from mass spectrometry experiments. Base on RawTools and UNIX command line.
+pyRawTools is a Python package for Windows/Linux/Mac processing raw data from mass spectrometry experiments. Base on RawTools and UNIX command line.
 
 # Install
 1. Must install mono
@@ -25,9 +25,9 @@ pyRawTools is a Python package for Linux/Mac processing raw data from mass spect
 # Usage
 1. Convert raw file to pandas DataFrame
 ```python
-from pyRawTools import Loader
+from pyRawTools import MSLoader
 
 
-loader = Loader()
+loader = MSLoader()
 raw_data, raw_metrix = loader.load('path/to/raw/file.RAW')
 ```

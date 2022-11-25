@@ -19,3 +19,4 @@
 2022-05-05 13:03:57.509 -07:00 [INF] Extracting trailer extras
 2022-05-05 13:03:57.523 -07:00 [INF] Extracting precursor masses
 2022-05-05 13:03:57.532 -07:00 [INF] Extracting retention times
+2022-11-19 23:50:27.584 +08:00 [INF] Program started with arguments: 

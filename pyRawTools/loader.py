@@ -9,34 +9,58 @@ RT_PATH = os.path.join(DIR_PATH, 'module/RawTools/RawTools.exe')
 PLATFORM = platform.system()
 
 
-class Loader:
+class MSLoader:
     def __init__(self):
+        """
+        RawTools is a command line tool for extracting data from Thermo RAW files.
+        """
         pass
 
-    def load(self, raw_file_path) -> (pd.DataFrame, pd.DataFrame):
+    def version(self):
+        """
+        Get the version of RawTools.
+
+        :return: version info.
+        """
+        return self._run_command("version")
+
+    def load(self, raw_file_path) -> (pd.DataFrame, dict[int, pd.DataFrame]):
+        """
+        Load the raw file and return the raw data and the matrix data.
+
+        - raw data: Full MS data of the raw file.
+        - matrix data: List of every single frame MS data.
+
+        :param raw_file_path: Path of the raw file, must end with .RAW or .raw.
+        :return: raw data and matrix data.
+        """
         if os.path.isfile(raw_file_path) & raw_file_path.lower().endswith(".raw"):
             with tempfile.TemporaryDirectory() as temp_dir:
                 print("Start extracting data from raw file...")
-                data_path = self._run_command("load", raw_file_path, temp_dir)
+                self._run_command("load", raw_file_path, temp_dir)
                 print("Data extraction completed, start loading data...")
+                data_path = os.path.join(temp_dir, os.path.basename(raw_file_path) + "_allScansData.txt")
                 raw = pd.read_table(data_path)
                 print("Data loaded.")
-            metrix = self.metrix(raw)
-            return raw, metrix
+            matrix = self.matrix(raw)
+            return raw, matrix
         else:
             raise FileNotFoundError("Raw file not found.")
 
     @staticmethod
-    def metrix(raw: pd.DataFrame) -> list[pd.DataFrame]:
-        scan_number = raw['Scan'].max()
-        metrix = [raw.loc[raw["Scan"] == i + 1].drop(columns=["Scan"]) for i in range(scan_number)]
-        return metrix
+    def matrix(raw: pd.DataFrame) -> dict[int, pd.DataFrame]:
+        matrix = {}
+        scan = raw["Scan"].max()
+        for m in range(scan):
+            matrix[m] = raw.loc[raw["Scan"] == m + 1, ["Mass", "Intensity"]].reset_index(drop=True)
+        return matrix
 
     @staticmethod
     def _run_command(params, raw_file_path=None, temp_dir=None):
-        command = [RT_PATH, "-f", raw_file_path, "-o", temp_dir, "-asd"]
-        data_path = os.path.join(temp_dir, os.path.basename(raw_file_path) + "_allScansData.txt")
+        if params == "version":
+            command = [RT_PATH, "-version"]
+        elif params == "load":
+            command = [RT_PATH, "-f", raw_file_path, "-o", temp_dir, "-asd"]
         if PLATFORM != "Windows":
             command = ["mono"] + command
         subprocess.run(command, capture_output=False)
-        return data_path

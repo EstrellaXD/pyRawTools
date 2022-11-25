@@ -1,1 +1,3 @@
-from .loader import Loader
+name = "pyRawTools"
+
+from .loader import MSLoader
