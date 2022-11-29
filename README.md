@@ -12,16 +12,24 @@ pyRawTools is a Python package for Windows/Linux/Mac processing raw data from ma
    ```bash
     sudo apt install mono-complete
     ```
-2. Build
-   1. Clone this repository
-      ```bash
-      git clone https://github.com/EstrellaXD/pyRawTools.git
-      ```
-   2. Install python package
-      ```bash
-      cd pyRawTools
-      python setup.py install
-      ```
+2. Install or Build
+   1. Install
+
+      2. ```bash
+         pip install pyRawTools
+         ```
+         
+   2. Build
+      1. Clone this repository
+         ```bash
+         git clone https://github.com/EstrellaXD/pyRawTools.git
+         ```
+      2. Install python package
+         ```bash
+         cd pyRawTools
+         python setup.py install
+         ```
+
 # Usage
 1. Convert raw file to pandas DataFrame
 ```python

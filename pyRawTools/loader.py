@@ -39,15 +39,15 @@ class MSLoader:
                 print("Start extracting data from raw file...")
                 try:
                     self._run_command("load", raw_file_path, temp_dir)
+                    print("Data extraction completed, start loading data...")
+                    data_path = os.path.join(temp_dir, os.path.basename(raw_file_path) + "_allScansData.txt")
+                    raw = pd.read_table(data_path)
+                    print("Data loaded.")
+                    matrix = self.matrix(raw)
+                    return raw, matrix
                 except IOError:
                     print("Cannot connect to Terminal.")
                     raise IOError
-                print("Data extraction completed, start loading data...")
-                data_path = os.path.join(temp_dir, os.path.basename(raw_file_path) + "_allScansData.txt")
-                raw = pd.read_table(data_path)
-                print("Data loaded.")
-            matrix = self.matrix(raw)
-            return raw, matrix
         else:
             raise FileNotFoundError("Raw file not found.")
 
