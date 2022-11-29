@@ -5,7 +5,7 @@ import pandas as pd
 import platform
 
 DIR_PATH = os.path.dirname(os.path.abspath(__file__))
-RT_PATH = os.path.join(DIR_PATH, 'module/RawTools/RawTools.exe')
+RT_PATH = os.path.join(DIR_PATH, 'module', 'RawTools', 'RawTools.exe')
 PLATFORM = platform.system()
 
 
@@ -37,7 +37,11 @@ class MSLoader:
         if os.path.isfile(raw_file_path) & raw_file_path.lower().endswith(".raw"):
             with tempfile.TemporaryDirectory() as temp_dir:
                 print("Start extracting data from raw file...")
-                self._run_command("load", raw_file_path, temp_dir)
+                try:
+                    self._run_command("load", raw_file_path, temp_dir)
+                except IOError:
+                    print("Cannot connect to Terminal.")
+                    raise IOError
                 print("Data extraction completed, start loading data...")
                 data_path = os.path.join(temp_dir, os.path.basename(raw_file_path) + "_allScansData.txt")
                 raw = pd.read_table(data_path)

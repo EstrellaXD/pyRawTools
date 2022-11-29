@@ -1,7 +1,7 @@
 from setuptools import find_packages, setup
 
 
-VERSION = '0.1.3'
+VERSION = '0.1.4'
 
 setup(
     name='pyRawTools',
@@ -16,7 +16,7 @@ setup(
     install_requires=[
         'pandas',
     ],
-    python_requires='>=3.6',
+    python_requires='>=3.8',
     classifiers=[
         "Operating System :: macOS / Linux",
         "Programming Language :: Python :: 3",
