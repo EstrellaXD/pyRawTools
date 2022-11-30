@@ -4,6 +4,8 @@ import tempfile
 import pandas as pd
 import platform
 
+from typing import Dict
+
 DIR_PATH = os.path.dirname(os.path.abspath(__file__))
 RT_PATH = os.path.join(DIR_PATH, 'module', 'RawTools', 'RawTools.exe')
 PLATFORM = platform.system()
@@ -24,7 +26,7 @@ class MSLoader:
         """
         return self._run_command("version")
 
-    def load(self, raw_file_path) -> (pd.DataFrame, dict[int, pd.DataFrame]):
+    def load(self, raw_file_path: str) -> (pd.DataFrame, Dict[int, pd.DataFrame]):
         """
         Load the raw file and return the raw data and the matrix data.
 
@@ -52,7 +54,7 @@ class MSLoader:
             raise FileNotFoundError("Raw file not found.")
 
     @staticmethod
-    def matrix(raw: pd.DataFrame) -> dict[int, pd.DataFrame]:
+    def matrix(raw) -> Dict[int, pd.DataFrame]:
         matrix = {}
         scan = raw["Scan"].max()
         for m in range(scan):
