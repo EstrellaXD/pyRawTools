@@ -44,7 +44,7 @@ class MSLoader:
                     raw = pd.read_table(data_path)
                     print("Data loaded.")
                     matrix = self.__matrix(raw)
-                    raw = raw.set_index(["Scan","RententionTime", "Mass"], inplace=True)
+                    raw = raw.set_index(["Scan", "RetentionTime"], inplace=True)
                     return raw, matrix
                 except IOError:
                     print("Cannot connect to Terminal.")
