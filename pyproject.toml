@@ -4,13 +4,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pyRawTools"
-version = "0.1.5"
+version = "0.1.6"
 authors = [
   { name="Estrella Pan", email="estrellaxd05@gmail.com" },
 ]
 description = "pyRawTools is a Python package for loading Thermo MS data."
 readme = "README.md"
-requires-python = ">=3.7"
+requires-python = ">=3.9"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",

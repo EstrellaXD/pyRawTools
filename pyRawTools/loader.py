@@ -22,7 +22,7 @@ class MSLoader:
 
         :return: version info.
         """
-        return self._run_command("version")
+        return self.__run_command("version")
 
     def load(self, raw_file_path) -> (pd.DataFrame, dict[int, pd.DataFrame]):
         """
@@ -38,12 +38,13 @@ class MSLoader:
             with tempfile.TemporaryDirectory() as temp_dir:
                 print("Start extracting data from raw file...")
                 try:
-                    self._run_command("load", raw_file_path, temp_dir)
+                    self.__run_command("load", raw_file_path, temp_dir)
                     print("Data extraction completed, start loading data...")
                     data_path = os.path.join(temp_dir, os.path.basename(raw_file_path) + "_allScansData.txt")
                     raw = pd.read_table(data_path)
                     print("Data loaded.")
-                    matrix = self.matrix(raw)
+                    matrix = self.__matrix(raw)
+                    raw = raw.set_index(["Scan","RententionTime", "Mass"], inplace=True)
                     return raw, matrix
                 except IOError:
                     print("Cannot connect to Terminal.")
@@ -52,7 +53,7 @@ class MSLoader:
             raise FileNotFoundError("Raw file not found.")
 
     @staticmethod
-    def matrix(raw: pd.DataFrame) -> dict[int, pd.DataFrame]:
+    def __matrix(raw: pd.DataFrame) -> dict[int, pd.DataFrame]:
         matrix = {}
         scan = raw["Scan"].max()
         for m in range(scan):
@@ -60,7 +61,7 @@ class MSLoader:
         return matrix
 
     @staticmethod
-    def _run_command(params, raw_file_path=None, temp_dir=None):
+    def __run_command(params, raw_file_path=None, temp_dir=None):
         if params == "version":
             command = [RT_PATH, "-version"]
         elif params == "load":
