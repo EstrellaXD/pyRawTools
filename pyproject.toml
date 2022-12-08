@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pyRawTools"
-version = "0.1.7"
+version = "0.1.8"
 authors = [
   { name="Estrella Pan", email="estrellaxd05@gmail.com" },
 ]

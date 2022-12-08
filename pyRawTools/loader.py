@@ -24,7 +24,7 @@ class MSLoader:
         """
         return self.__run_command("version")
 
-    def load(self, raw_file_path) -> (pd.DataFrame, dict[int, pd.DataFrame]):
+    def load(self, raw_file_path) -> pd.DataFrame:
         """
         Load the raw file and return the raw data and the matrix data.
 
@@ -43,22 +43,13 @@ class MSLoader:
                     data_path = os.path.join(temp_dir, os.path.basename(raw_file_path) + "_allScansData.txt")
                     raw = pd.read_table(data_path)
                     print("Data loaded.")
-                    matrix = self.__matrix(raw)
-                    raw = raw.set_index(["Scan", "RetentionTime"], inplace=True)
-                    return raw, matrix
+                    raw = raw.set_index("Scan")
+                    return raw
                 except IOError:
                     print("Cannot connect to Terminal.")
                     raise IOError
         else:
             raise FileNotFoundError("Raw file not found.")
-
-    @staticmethod
-    def __matrix(raw: pd.DataFrame) -> dict[int, pd.DataFrame]:
-        matrix = {}
-        scan = raw["Scan"].max()
-        for m in range(scan):
-            matrix[m] = raw.loc[raw["Scan"] == m + 1, ["Mass", "Intensity"]].reset_index(drop=True)
-        return matrix
 
     @staticmethod
     def __run_command(params, raw_file_path=None, temp_dir=None):
