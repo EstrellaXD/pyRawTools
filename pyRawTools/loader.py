@@ -59,4 +59,4 @@ class MSLoader:
             command = [RT_PATH, "-f", raw_file_path, "-o", temp_dir, "-asd"]
         if PLATFORM != "Windows":
             command = ["mono"] + command
-        subprocess.run(command, capture_output=False)
+        subprocess.run(command, capture_output=False, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
