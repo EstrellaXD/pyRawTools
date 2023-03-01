@@ -39,7 +39,7 @@ class MSLoader:
         """
         if os.path.isfile(raw_file_path) & raw_file_path.lower().endswith(".raw"):
             with tempfile.TemporaryDirectory() as temp_dir:
-                print("Start extracting data from raw file...")
+                logger.info("Start extracting data from raw file...")
                 try:
                     self.__run_command("load", raw_file_path, temp_dir)
                     logger.info("Data extraction completed, start loading data...")
