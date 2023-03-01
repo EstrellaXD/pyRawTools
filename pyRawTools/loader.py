@@ -1,5 +1,6 @@
 import subprocess
 import os
+import logging
 import tempfile
 import pandas as pd
 import platform
@@ -7,6 +8,8 @@ import platform
 DIR_PATH = os.path.dirname(os.path.abspath(__file__))
 RT_PATH = os.path.join(DIR_PATH, 'module', 'RawTools', 'RawTools.exe')
 PLATFORM = platform.system()
+
+logger = logging.getLogger(__name__)
 
 
 class MSLoader:
@@ -39,16 +42,17 @@ class MSLoader:
                 print("Start extracting data from raw file...")
                 try:
                     self.__run_command("load", raw_file_path, temp_dir)
-                    print("Data extraction completed, start loading data...")
+                    logger.info("Data extraction completed, start loading data...")
                     data_path = os.path.join(temp_dir, os.path.basename(raw_file_path) + "_allScansData.txt")
                     raw = pd.read_table(data_path)
-                    print("Data loaded.")
+                    logger.info("Data loaded.")
                     raw = raw.set_index("Scan")
                     return raw
                 except IOError:
-                    print("Cannot connect to Terminal.")
+                    logger.warning("Cannot connect to Terminal.")
                     raise IOError
         else:
+            logger.warning("Raw file not found.")
             raise FileNotFoundError("Raw file not found.")
 
     @staticmethod
@@ -57,6 +61,8 @@ class MSLoader:
             command = [RT_PATH, "-version"]
         elif params == "load":
             command = [RT_PATH, "-f", raw_file_path, "-o", temp_dir, "-asd"]
+        elif params == "folder":
+            command = [RT_PATH, "-d", raw_file_path, "-o", temp_dir, "-asd"]
         if PLATFORM != "Windows":
             command = ["mono"] + command
         subprocess.run(command, capture_output=False, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
