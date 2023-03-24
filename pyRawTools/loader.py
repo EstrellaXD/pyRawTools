@@ -1,7 +1,7 @@
 import subprocess
 import os
 import logging
-import tempfile
+from tempfile import TemporaryDirectory
 import pandas as pd
 import platform
 
@@ -27,7 +27,7 @@ class MSLoader:
         """
         return self.__run_command("version")
 
-    def load(self, raw_file_path) -> pd.DataFrame:
+    def load(self, raw_file_path, temp_dir: str | None = None) -> pd.DataFrame:
         """
         Load the raw file and return the raw data and the matrix data.
 
@@ -35,10 +35,11 @@ class MSLoader:
         - matrix data: List of every single frame MS data.
 
         :param raw_file_path: Path of the raw file, must end with .RAW or .raw.
+        :param temp_dir: Temporary directory for storing data.
         :return: raw data and matrix data.
         """
         if os.path.isfile(raw_file_path) & raw_file_path.lower().endswith(".raw"):
-            with tempfile.TemporaryDirectory() as temp_dir:
+            with TemporaryDirectory(dir=temp_dir) as temp_dir:
                 logger.info("Start extracting data from raw file...")
                 try:
                     self.__run_command("load", raw_file_path, temp_dir)

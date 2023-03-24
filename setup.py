@@ -1,7 +1,7 @@
 from setuptools import find_packages, setup
 
 
-VERSION = '0.2.1'
+VERSION = '0.2.2'
 
 setup(
     name='pyRawTools',
