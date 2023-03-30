@@ -3,6 +3,7 @@ import os
 import logging
 from tempfile import TemporaryDirectory
 import pandas as pd
+import polars as pl
 import platform
 
 DIR_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -27,7 +28,12 @@ class MSLoader:
         """
         return self.__run_command("version")
 
-    def load(self, raw_file_path, temp_dir: str | None = None) -> pd.DataFrame:
+    def load(
+            self,
+            raw_file_path,
+            temp_dir: str | None = None,
+            backend: str = "pandas"
+    ) -> pd.DataFrame:
         """
         Load the raw file and return the raw data and the matrix data.
 
@@ -36,6 +42,7 @@ class MSLoader:
 
         :param raw_file_path: Path of the raw file, must end with .RAW or .raw.
         :param temp_dir: Temporary directory for storing data.
+        :param backend: Backend for loading data, "pandas" or "polars".
         :return: raw data and matrix data.
         """
         if os.path.isfile(raw_file_path) & raw_file_path.lower().endswith(".raw"):
@@ -45,7 +52,10 @@ class MSLoader:
                     self.__run_command("load", raw_file_path, temp_dir)
                     logger.info("Data extraction completed, start loading data...")
                     data_path = os.path.join(temp_dir, os.path.basename(raw_file_path) + "_allScansData.txt")
-                    raw = pd.read_table(data_path)
+                    if backend == "pandas":
+                        raw = pd.read_table(data_path)
+                    elif backend == "polars":
+                        raw = pl.read_csv(data_path, sep="\t", low_memory=False).to_pandas()
                     logger.info("Data loaded.")
                     raw = raw.set_index("Scan")
                     return raw
